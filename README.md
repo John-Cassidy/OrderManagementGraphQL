@@ -2,4 +2,4 @@
 
 .Net Core and React with GraphQL and HotChocolate. EF, Apollo CodeGen, Docker, Material UI, Relational DB
 
-[Project Reference](https://github.com/ivanthagura/OrderManagementApp)
+[OrderManagementApp Project Reference](https://github.com/ivanthagura/OrderManagementApp)
