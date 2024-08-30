@@ -7,9 +7,9 @@ namespace Infrastructure.Data;
 
 public class OMAContext : DbContext
 {
-    DbSet<Customer> Customers { get; set; }
-    DbSet<Order> Orders { get; set; }
-    DbSet<Address> Addresses { get; set; }
+    public DbSet<Customer> Customers { get; set; }
+    public DbSet<Order> Orders { get; set; }
+    public DbSet<Address> Addresses { get; set; }
 
     public OMAContext(DbContextOptions<OMAContext> options) : base(options)
     {
