@@ -1,6 +1,8 @@
 using API.GraphQL;
+using Core.Interfaces;
 using GraphQL.Server.Ui.Voyager;
 using Infrastructure.Data;
+using Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
 
 string AllowSpecificOrigins = "_allowSpecificOrigins";
@@ -12,6 +14,8 @@ builder.Services.AddDbContextFactory<OMAContext>(options =>
     options.UseInMemoryDatabase("InMemoryDb");
     // options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
+builder.Services.AddScoped<IOrderService, OrderService>();
+builder.Services.AddScoped<ICustomerService, CustomerService>();
 
 // graphql
 builder.Services

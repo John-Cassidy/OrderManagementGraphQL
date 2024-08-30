@@ -34,23 +34,31 @@ dotnet sln add Core
 http://localhost:5263/graphql/
 
 ```json
-query GetCustomers{
-  customers{
+query GetCustomers {
+  customers {
     id
     firstName
     lastName
     contactNumber
-    address{
+    email
+    address {
       addressLine1
       addressLine2
       city
       state
       country
     }
-    orders{
+    orders {
       id
       customerId
       orderDate
+      depositAmount
+      description
+      isDeleted
+      isDelivery
+      otherNotes
+      status
+      totalAmount
     }
   }
 }
@@ -61,6 +69,7 @@ query GetCustomerById{
     firstName
     lastName
     contactNumber
+    email
     address{
       addressLine1
       addressLine2
@@ -72,23 +81,59 @@ query GetCustomerById{
       id
       customerId
       orderDate
+      description
+      totalAmount
+      depositAmount
+      isDelivery
+      status
+      otherNotes
     }
   }
 }
 
-query GetOrders{
-  orders{
+query GetOrders {
+  orders {
     id
     customerId
     orderDate
-    customer{
+    description
+    totalAmount
+    depositAmount
+    isDelivery
+    status
+    otherNotes
+    customer {
       firstName
       lastName
+      contactNumber
+      email
+    }
+  }
+}
+
+query GetOrderById{
+  orders(where: {id: {eq: 1}}){
+    id
+    customerId
+    orderDate
+    description
+    totalAmount
+    depositAmount
+    isDelivery
+    status
+    otherNotes
+    customer {
+      firstName
+      lastName
+      contactNumber
+      email
     }
   }
 }
 ```
 
 ## GraphQL Voyager
+
+Relations between db tables and GraphQL
 
 http://localhost:5263/graphql-voyager
