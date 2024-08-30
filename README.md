@@ -15,6 +15,8 @@ A fullstack app to maintain and track customers and orders using the following t
 
 ![Project Diagram](./.resources/images/001_project_diagram.png)
 
+## Backend
+
 ```powershell
 dotnet new sln --name OrderManagementBackend --dry-run
 
@@ -25,4 +27,41 @@ dotnet new classlib -o Core
 dotnet sln add API
 dotnet sln add Infrastructure
 dotnet sln add Core
+```
+
+## GraphQL
+
+```json
+query GetCustomers{
+  customers{
+    id
+    firstName
+    lastName
+    contactNumber
+    address{
+      addressLine1
+      addressLine2
+      city
+      state
+      country
+    }
+    orders{
+      id
+      customerId
+      orderDate
+    }
+  }
+}
+
+query GetOrders{
+  orders{
+    id
+    customerId
+    orderDate
+    customer{
+      firstName
+      lastName
+    }
+  }
+}
 ```
