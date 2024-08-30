@@ -1,4 +1,14 @@
+using Infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
+
+// Add services to the container.
+builder.Services.AddDbContextFactory<OMAContext>(options =>
+{
+    options.UseInMemoryDatabase("InMemoryDb");
+    // options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"));
+});
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
