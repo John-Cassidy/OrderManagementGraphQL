@@ -31,9 +31,32 @@ dotnet sln add Core
 
 ## GraphQL
 
+http://localhost:5263/graphql/
+
 ```json
 query GetCustomers{
   customers{
+    id
+    firstName
+    lastName
+    contactNumber
+    address{
+      addressLine1
+      addressLine2
+      city
+      state
+      country
+    }
+    orders{
+      id
+      customerId
+      orderDate
+    }
+  }
+}
+
+query GetCustomerById{
+  customers(where: {id: {eq: 1}}){
     id
     firstName
     lastName
@@ -65,3 +88,7 @@ query GetOrders{
   }
 }
 ```
+
+## GraphQL Voyager
+
+http://localhost:5263/graphql-voyager
