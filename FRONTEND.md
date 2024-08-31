@@ -95,3 +95,30 @@ Fetching latest versions of selected plugins...
 
     To run GraphQL Code Generator.
 ```
+
+Manually update codegen.ts
+
+```typescript
+import type { CodegenConfig } from '@graphql-codegen/cli';
+
+const config: CodegenConfig = {
+  overwrite: true,
+  schema: 'http://localhost:5263/graphql/',
+  documents: '**/*.{gql,graphql}',
+  generates: {
+    'src/graphql/generated/schema.ts': {
+      plugins: [
+        'typescript',
+        'typescript-operations',
+        'typescript-react-apollo',
+      ],
+    },
+  },
+};
+
+export default config;
+```
+
+From command line run: npm run codegen
+
+.. This will create /graphql/generated/schema.ts
