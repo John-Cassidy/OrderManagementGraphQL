@@ -63,3 +63,35 @@ Done. Now run:
 npm i graphql @apollo/client @graphql-codegen/cli @graphql-codegen/typescript @graphql-codegen/typescript-operations @graphql-codegen/typescript-react-apollo
 
 ```
+
+## Graphql codegen
+
+[Documentation](https://the-guild.dev/graphql/codegen/docs/getting-started/installation)
+
+```powershell
+
+npx graphql-code-generator init
+
+    Welcome to GraphQL Code Generator!
+    Answer few questions and we will setup everything for you.
+
+? What type of application are you building? Application built with React
+? Where is your schema?: (path or url) http://localhost:5263/graphql/
+? Where are your operations and fragments?: **/*.{gql,graphql}
+? Where to write the output: src/gql/
+? Do you want to generate an introspection file? No
+? How to name the config file? codegen.ts
+? What script in package.json should run the codegen? codegen
+
+Fetching latest versions of selected plugins...
+
+    Config file generated at codegen.ts
+
+      $ npm install
+
+    To install the plugins.
+
+      $ npm run codegen
+
+    To run GraphQL Code Generator.
+```
