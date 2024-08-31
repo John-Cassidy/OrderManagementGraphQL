@@ -64,7 +64,7 @@ npm i graphql @apollo/client @graphql-codegen/cli @graphql-codegen/typescript @g
 
 ```
 
-## Graphql codegen
+### Graphql codegen
 
 [Documentation](https://the-guild.dev/graphql/codegen/docs/getting-started/installation)
 
@@ -122,3 +122,14 @@ export default config;
 From command line run: npm run codegen
 
 .. This will create /graphql/generated/schema.ts
+
+### Material UI and React Router
+
+[Material UI]()
+[React Router](https://reactrouter.com/en/main)
+
+```powershell
+npm i @mui/material @mui/icons-material @mui/lab
+npm i @emotion/react @emotion/styled
+npm i react-router-dom
+```
