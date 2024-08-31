@@ -17,7 +17,9 @@ Application will use:
 
   - Generates templated code to consume the already created queries based on the back-end schema
 
-## Create React App with CRA
+## Create React App
+
+### Create React App with CRA
 
 [Legacy Documenation](https://create-react-app.dev/docs/getting-started)
 
@@ -32,13 +34,11 @@ Creating a new React app in C:\DEV\github.com\OrderManagementGraphQL\frontend\or
 
 Installing packages. This might take a couple of minutes.
 Installing react, react-dom, and react-scripts with cra-template-typescript...
-
-
 ```
 
 [How to Add eslint to React Project](https://www.freecodecamp.org/news/how-to-add-eslint-to-your-react-project/)
 
-## Alternative: Create React App using Vite
+### Alternative: Create React App using Vite
 
 [Documentation](https://vitejs.dev/guide/)
 
@@ -55,4 +55,11 @@ Done. Now run:
   cd ordermanagementvite
   npm install
   npm run start
+```
+
+## Packages
+
+```powershell
+npm i graphql @apollo/client @graphql-codegen/cli @graphql-codegen/typescript @graphql-codegen/typescript-operations @graphql-codegen/typescript-react-apollo
+
 ```
