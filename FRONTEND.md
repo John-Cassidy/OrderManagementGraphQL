@@ -125,11 +125,21 @@ From command line run: npm run codegen
 
 ### Material UI and React Router
 
-[Material UI]()
+[Material UI](https://mui.com/material-ui/getting-started/installation/)
 [React Router](https://reactrouter.com/en/main)
 
 ```powershell
 npm i @mui/material @mui/icons-material @mui/lab
 npm i @emotion/react @emotion/styled
 npm i react-router-dom
+```
+
+### AG Grid
+
+[Documentation](https://www.ag-grid.com/react-data-grid/getting-started/)
+
+[Another Example of Ag Grid with GraphQL](https://blog.ag-grid.com/building-crud-in-ag-grid-with-graphql-and-react/)
+
+```powershell
+npm i ag-grid-react ag-grid-community
 ```
