@@ -41,6 +41,14 @@ export default function NavBar() {
                 Customers
               </Link>
             </Button>
+            <Button
+              key='Orders'
+              sx={{ my: 2, color: 'white', display: 'block ' }}
+            >
+              <Link className='text-link' to='/orders'>
+                Orders
+              </Link>
+            </Button>
           </Box>
         </Toolbar>
       </Container>
