@@ -5,12 +5,14 @@ import { IconButton } from '@mui/material';
 import LaunchIcon from '@mui/icons-material/Launch';
 import OmgGrid from '../../../components/elements/OmGrid';
 import { useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 interface Props {
   customers: Customer[];
 }
 
 export default function CustomerList({ customers }: Props) {
+  const navigate = useNavigate();
   const columnDefs: ColDef<Customer>[] = useMemo(
     () => [
       {
@@ -19,11 +21,7 @@ export default function CustomerList({ customers }: Props) {
         suppressSizeToFit: true,
         cellRenderer: function (params: any) {
           return (
-            <IconButton
-              onClick={() =>
-                window.open(`/customers/${params.value}`, '_blank')
-              }
-            >
+            <IconButton onClick={() => navigate(`/customers/${params.value}`)}>
               <LaunchIcon fontSize='small' color='secondary' />
             </IconButton>
           );

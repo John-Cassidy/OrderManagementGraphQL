@@ -1,20 +1,31 @@
 import { Customer, Order } from '../../../graphql/generated/schema';
 
 import { ColDef } from 'ag-grid-community';
+import { IconButton } from '@mui/material';
+import LaunchIcon from '@mui/icons-material/Launch';
 import OmgGrid from '../../../components/elements/OmGrid';
 import { useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-interface OrderListProps {
+interface Props {
   orders: Order[];
 }
 
-export default function OrderList({ orders }: OrderListProps) {
+export default function OrderList({ orders }: Props) {
+  const navigate = useNavigate();
   const columnDefs: ColDef<Order>[] = useMemo(
     () => [
       {
         field: 'id',
         width: 50,
         suppressSizeToFit: true,
+        cellRenderer: function (params: any) {
+          return (
+            <IconButton onClick={() => navigate(`/orders/${params.value}`)}>
+              <LaunchIcon fontSize='small' color='secondary' />
+            </IconButton>
+          );
+        },
       },
       {
         field: 'customer',

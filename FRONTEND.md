@@ -144,7 +144,7 @@ npm i react-router-dom
 npm i ag-grid-react ag-grid-community
 ```
 
-### Formik and Yup
+### Formik, Yup, and date-fns
 
 [Documentation](https://formik.org/docs/overview)
 
@@ -153,4 +153,5 @@ npm i ag-grid-react ag-grid-community
 ```powershell
 npm i formik
 npm i yup
+npm i date-fns
 ```
