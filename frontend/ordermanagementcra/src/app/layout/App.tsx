@@ -3,6 +3,7 @@ import './styles.css';
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
+import CustomerPage from '../../features/customers/CustomerPage';
 import CustomersDashboard from '../../features/customers/customersDashboard/CustomersDashboard';
 import HomePage from '../../features/home/HomePage';
 import Layout from './Layout';
@@ -24,6 +25,7 @@ function App() {
           <Route path='/' element={<Layout />}>
             <Route index element={<HomePage />} />
             <Route path='customers' element={<CustomersDashboard />} />
+            <Route path='customers/:customerId' element={<CustomerPage />} />
             <Route path='orders' element={<OrdersDashboard />} />
           </Route>
         </Routes>

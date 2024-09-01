@@ -144,10 +144,13 @@ npm i react-router-dom
 npm i ag-grid-react ag-grid-community
 ```
 
-### Formik
+### Formik and Yup
 
 [Documentation](https://formik.org/docs/overview)
 
+[Schema-based form validation with Yup](https://github.com/jquense/yup)
+
 ```powershell
 npm i formik
+npm i yup
 ```

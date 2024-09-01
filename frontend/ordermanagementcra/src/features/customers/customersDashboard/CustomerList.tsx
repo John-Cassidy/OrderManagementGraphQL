@@ -1,6 +1,8 @@
 import { Address, Customer } from '../../../graphql/generated/schema';
 
 import { ColDef } from 'ag-grid-community';
+import { IconButton } from '@mui/material';
+import LaunchIcon from '@mui/icons-material/Launch';
 import OmgGrid from '../../../components/elements/OmGrid';
 import { useMemo } from 'react';
 
@@ -15,6 +17,17 @@ export default function CustomerList({ customers }: Props) {
         field: 'id',
         width: 50,
         suppressSizeToFit: true,
+        cellRenderer: function (params: any) {
+          return (
+            <IconButton
+              onClick={() =>
+                window.open(`/customers/${params.value}`, '_blank')
+              }
+            >
+              <LaunchIcon fontSize='small' color='secondary' />
+            </IconButton>
+          );
+        },
       },
       { field: 'firstName' },
       { field: 'lastName' },

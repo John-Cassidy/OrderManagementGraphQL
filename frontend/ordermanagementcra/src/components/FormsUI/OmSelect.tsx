@@ -1,7 +1,5 @@
-import { Menu, MenuItem, TextField } from '@mui/material';
+import { MenuItem, TextField } from '@mui/material';
 import { useField, useFormikContext } from 'formik';
-
-import { FullWidth } from 'ag-grid-community/dist/types/core/components/framework/componentTypes';
 
 interface Props {
   name: string;
@@ -21,7 +19,7 @@ export default function OmSelect({ name, options, otherProps }: Props) {
     ...field,
     ...otherProps,
     select: true,
-    FullWidth: true,
+    fullWidth: true,
     variant: 'outlined',
     onChange: handleChange,
   };
