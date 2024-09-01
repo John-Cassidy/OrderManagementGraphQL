@@ -1,20 +1,14 @@
-import 'ag-grid-community/styles/ag-grid.css';
-import 'ag-grid-community/styles/ag-theme-alpine.css';
-
 import { Customer, Order } from '../../../graphql/generated/schema';
-import { useEffect, useMemo, useState } from 'react';
 
-import { AgGridReact } from 'ag-grid-react';
 import { ColDef } from 'ag-grid-community';
+import OmgGrid from '../../../components/elements/OmGrid';
+import { useMemo } from 'react';
 
 interface OrderListProps {
   orders: Order[];
 }
 
 export default function OrderList({ orders }: OrderListProps) {
-  const [rowData, setRowData] = useState<Order[]>([]);
-  const [gridApi, setGridApi] = useState<any>(null);
-
   const columnDefs: ColDef<Order>[] = useMemo(
     () => [
       {
@@ -33,39 +27,11 @@ export default function OrderList({ orders }: OrderListProps) {
         field: 'orderDate',
       },
       { field: 'description' },
+      { field: 'totalAmount' },
       { field: 'status' },
     ],
     []
   );
 
-  const defaultColDef = useMemo(
-    () => ({
-      sortable: true,
-      filter: true,
-      resizable: true,
-    }),
-    []
-  );
-
-  useEffect(() => {
-    setRowData(orders);
-    if (gridApi) {
-      gridApi.refreshCells();
-    }
-  }, [orders, gridApi]);
-
-  const onGridReady = (params: any) => {
-    setGridApi(params.api);
-  };
-
-  return (
-    <div className='ag-theme-alpine' style={{ height: 500, width: '100%' }}>
-      <AgGridReact
-        rowData={rowData}
-        columnDefs={columnDefs}
-        defaultColDef={defaultColDef}
-        onGridReady={onGridReady}
-      />
-    </div>
-  );
+  return <OmgGrid columnDefs={columnDefs} rowDataProps={orders} />;
 }
