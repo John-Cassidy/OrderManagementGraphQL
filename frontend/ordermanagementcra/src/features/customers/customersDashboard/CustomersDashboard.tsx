@@ -5,6 +5,7 @@ import {
 import { Grid, Typography } from '@mui/material';
 
 import CustomerList from './CustomerList';
+import OmAlert from '../../../components/elements/OmAlert';
 import OmLoading from '../../../components/elements/OmLoading';
 
 export default function CustomersDashboard() {
@@ -15,7 +16,7 @@ export default function CustomersDashboard() {
   }
 
   if (error || !customersData) {
-    return <div>Error...</div>;
+    return <OmAlert message='Could not load customers data' />;
   }
 
   const customers = customersData.customers as Customer[];
