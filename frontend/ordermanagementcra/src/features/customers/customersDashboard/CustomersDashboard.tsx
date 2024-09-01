@@ -5,13 +5,13 @@ import {
 import { Grid, Typography } from '@mui/material';
 
 import CustomerList from './CustomerList';
-import React from 'react';
+import OmLoading from '../../../components/elements/OmLoading';
 
 export default function CustomersDashboard() {
   const { data: customersData, loading, error } = useGetCustomersQuery();
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <OmLoading />;
   }
 
   if (error || !customersData) {

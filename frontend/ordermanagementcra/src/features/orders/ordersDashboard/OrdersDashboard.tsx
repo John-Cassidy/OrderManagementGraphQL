@@ -1,14 +1,14 @@
 import { Grid, Typography } from '@mui/material';
 import { Order, useGetOrdersQuery } from '../../../graphql/generated/schema';
 
+import OmLoading from '../../../components/elements/OmLoading';
 import OrderList from './OrderList';
-import React from 'react';
 
 export default function CustomersDashboard() {
   const { data: ordersData, loading, error } = useGetOrdersQuery();
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <OmLoading />;
   }
 
   if (error || !ordersData) {
