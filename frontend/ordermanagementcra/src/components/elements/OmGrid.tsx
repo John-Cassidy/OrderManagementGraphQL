@@ -6,12 +6,12 @@ import { useEffect, useMemo, useState } from 'react';
 import { AgGridReact } from 'ag-grid-react';
 import { ColDef } from 'ag-grid-community';
 
-interface OmGridProps {
+interface Props {
   rowDataProps: any;
   columnDefs: ColDef<any>[];
 }
 
-export default function OmGrid({ rowDataProps, columnDefs }: OmGridProps) {
+export default function OmGrid({ rowDataProps, columnDefs }: Props) {
   const [rowData, setRowData] = useState<any[]>([]);
   const [gridApi, setGridApi] = useState<any>(null);
 

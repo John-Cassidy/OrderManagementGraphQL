@@ -143,3 +143,11 @@ npm i react-router-dom
 ```powershell
 npm i ag-grid-react ag-grid-community
 ```
+
+### Formik
+
+[Documentation](https://formik.org/docs/overview)
+
+```powershell
+npm i formik
+```
