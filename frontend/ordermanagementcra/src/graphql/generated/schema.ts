@@ -72,6 +72,19 @@ export type CustomerFilterInput = {
   orders?: InputMaybe<ListFilterInputTypeOfOrderFilterInput>;
 };
 
+export type CustomerModelInput = {
+  addressLine1?: InputMaybe<Scalars['String']['input']>;
+  addressLine2?: InputMaybe<Scalars['String']['input']>;
+  city?: InputMaybe<Scalars['String']['input']>;
+  contactNumber?: InputMaybe<Scalars['String']['input']>;
+  country?: InputMaybe<Scalars['String']['input']>;
+  email?: InputMaybe<Scalars['String']['input']>;
+  firstName?: InputMaybe<Scalars['String']['input']>;
+  id?: InputMaybe<Scalars['Int']['input']>;
+  lastName?: InputMaybe<Scalars['String']['input']>;
+  state?: InputMaybe<Scalars['String']['input']>;
+};
+
 export type DateTimeOperationFilterInput = {
   eq?: InputMaybe<Scalars['DateTime']['input']>;
   gt?: InputMaybe<Scalars['DateTime']['input']>;
@@ -124,6 +137,34 @@ export type ListFilterInputTypeOfOrderFilterInput = {
   some?: InputMaybe<OrderFilterInput>;
 };
 
+export type Mutation = {
+  __typename?: 'Mutation';
+  addOrUpdateCustomer?: Maybe<Customer>;
+  addOrUpdateOrder?: Maybe<Order>;
+  deleteCustomer: Scalars['Boolean']['output'];
+  deleteOrder: Scalars['Boolean']['output'];
+};
+
+
+export type MutationAddOrUpdateCustomerArgs = {
+  customer?: InputMaybe<CustomerModelInput>;
+};
+
+
+export type MutationAddOrUpdateOrderArgs = {
+  order?: InputMaybe<OrderModelInput>;
+};
+
+
+export type MutationDeleteCustomerArgs = {
+  customerId: Scalars['Int']['input'];
+};
+
+
+export type MutationDeleteOrderArgs = {
+  orderId: Scalars['Int']['input'];
+};
+
 export type Order = {
   __typename?: 'Order';
   customer?: Maybe<Customer>;
@@ -153,6 +194,18 @@ export type OrderFilterInput = {
   otherNotes?: InputMaybe<StringOperationFilterInput>;
   status?: InputMaybe<StatusOperationFilterInput>;
   totalAmount?: InputMaybe<DecimalOperationFilterInput>;
+};
+
+export type OrderModelInput = {
+  customerId: Scalars['Int']['input'];
+  depositAmount: Scalars['Decimal']['input'];
+  description?: InputMaybe<Scalars['String']['input']>;
+  id?: InputMaybe<Scalars['Int']['input']>;
+  isDelivery: Scalars['Boolean']['input'];
+  orderDate: Scalars['DateTime']['input'];
+  otherNotes?: InputMaybe<Scalars['String']['input']>;
+  status: Status;
+  totalAmount: Scalars['Decimal']['input'];
 };
 
 export type Query = {
@@ -200,6 +253,34 @@ export type StringOperationFilterInput = {
   startsWith?: InputMaybe<Scalars['String']['input']>;
 };
 
+export type AddOrUpdateCustomerMutationVariables = Exact<{
+  customer: CustomerModelInput;
+}>;
+
+
+export type AddOrUpdateCustomerMutation = { __typename?: 'Mutation', addOrUpdateCustomer?: { __typename?: 'Customer', id: number, firstName?: string | null, lastName?: string | null, email?: string | null, contactNumber?: string | null, address?: { __typename?: 'Address', addressLine1?: string | null, addressLine2?: string | null, city?: string | null, state?: string | null, country?: string | null } | null } | null };
+
+export type AddOrUpdateOrderMutationVariables = Exact<{
+  order: OrderModelInput;
+}>;
+
+
+export type AddOrUpdateOrderMutation = { __typename?: 'Mutation', addOrUpdateOrder?: { __typename?: 'Order', id: number, orderDate: any, description?: string | null, totalAmount: any, depositAmount: any, isDelivery: boolean, status: Status, otherNotes?: string | null, customer?: { __typename?: 'Customer', id: number, firstName?: string | null, lastName?: string | null, contactNumber?: string | null, email?: string | null } | null } | null };
+
+export type DeleteCustomerMutationVariables = Exact<{
+  id: Scalars['Int']['input'];
+}>;
+
+
+export type DeleteCustomerMutation = { __typename?: 'Mutation', deleteCustomer: boolean };
+
+export type DeleteOrderMutationVariables = Exact<{
+  id: Scalars['Int']['input'];
+}>;
+
+
+export type DeleteOrderMutation = { __typename?: 'Mutation', deleteOrder: boolean };
+
 export type GetCustomerByIdQueryVariables = Exact<{
   id: Scalars['Int']['input'];
 }>;
@@ -225,6 +306,159 @@ export type GetOrdersQueryVariables = Exact<{ [key: string]: never; }>;
 export type GetOrdersQuery = { __typename?: 'Query', orders?: Array<{ __typename?: 'Order', id: number, orderDate: any, description?: string | null, totalAmount: any, depositAmount: any, isDelivery: boolean, status: Status, otherNotes?: string | null, customer?: { __typename?: 'Customer', id: number, firstName?: string | null, lastName?: string | null, contactNumber?: string | null, email?: string | null } | null } | null> | null };
 
 
+export const AddOrUpdateCustomerDocument = gql`
+    mutation AddOrUpdateCustomer($customer: CustomerModelInput!) {
+  addOrUpdateCustomer(customer: $customer) {
+    id
+    firstName
+    lastName
+    email
+    contactNumber
+    address {
+      addressLine1
+      addressLine2
+      city
+      state
+      country
+    }
+  }
+}
+    `;
+export type AddOrUpdateCustomerMutationFn = Apollo.MutationFunction<AddOrUpdateCustomerMutation, AddOrUpdateCustomerMutationVariables>;
+
+/**
+ * __useAddOrUpdateCustomerMutation__
+ *
+ * To run a mutation, you first call `useAddOrUpdateCustomerMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useAddOrUpdateCustomerMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [addOrUpdateCustomerMutation, { data, loading, error }] = useAddOrUpdateCustomerMutation({
+ *   variables: {
+ *      customer: // value for 'customer'
+ *   },
+ * });
+ */
+export function useAddOrUpdateCustomerMutation(baseOptions?: Apollo.MutationHookOptions<AddOrUpdateCustomerMutation, AddOrUpdateCustomerMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<AddOrUpdateCustomerMutation, AddOrUpdateCustomerMutationVariables>(AddOrUpdateCustomerDocument, options);
+      }
+export type AddOrUpdateCustomerMutationHookResult = ReturnType<typeof useAddOrUpdateCustomerMutation>;
+export type AddOrUpdateCustomerMutationResult = Apollo.MutationResult<AddOrUpdateCustomerMutation>;
+export type AddOrUpdateCustomerMutationOptions = Apollo.BaseMutationOptions<AddOrUpdateCustomerMutation, AddOrUpdateCustomerMutationVariables>;
+export const AddOrUpdateOrderDocument = gql`
+    mutation AddOrUpdateOrder($order: OrderModelInput!) {
+  addOrUpdateOrder(order: $order) {
+    id
+    orderDate
+    description
+    totalAmount
+    depositAmount
+    isDelivery
+    status
+    otherNotes
+    customer {
+      id
+      firstName
+      lastName
+      contactNumber
+      email
+    }
+  }
+}
+    `;
+export type AddOrUpdateOrderMutationFn = Apollo.MutationFunction<AddOrUpdateOrderMutation, AddOrUpdateOrderMutationVariables>;
+
+/**
+ * __useAddOrUpdateOrderMutation__
+ *
+ * To run a mutation, you first call `useAddOrUpdateOrderMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useAddOrUpdateOrderMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [addOrUpdateOrderMutation, { data, loading, error }] = useAddOrUpdateOrderMutation({
+ *   variables: {
+ *      order: // value for 'order'
+ *   },
+ * });
+ */
+export function useAddOrUpdateOrderMutation(baseOptions?: Apollo.MutationHookOptions<AddOrUpdateOrderMutation, AddOrUpdateOrderMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<AddOrUpdateOrderMutation, AddOrUpdateOrderMutationVariables>(AddOrUpdateOrderDocument, options);
+      }
+export type AddOrUpdateOrderMutationHookResult = ReturnType<typeof useAddOrUpdateOrderMutation>;
+export type AddOrUpdateOrderMutationResult = Apollo.MutationResult<AddOrUpdateOrderMutation>;
+export type AddOrUpdateOrderMutationOptions = Apollo.BaseMutationOptions<AddOrUpdateOrderMutation, AddOrUpdateOrderMutationVariables>;
+export const DeleteCustomerDocument = gql`
+    mutation DeleteCustomer($id: Int!) {
+  deleteCustomer(customerId: $id)
+}
+    `;
+export type DeleteCustomerMutationFn = Apollo.MutationFunction<DeleteCustomerMutation, DeleteCustomerMutationVariables>;
+
+/**
+ * __useDeleteCustomerMutation__
+ *
+ * To run a mutation, you first call `useDeleteCustomerMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteCustomerMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteCustomerMutation, { data, loading, error }] = useDeleteCustomerMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useDeleteCustomerMutation(baseOptions?: Apollo.MutationHookOptions<DeleteCustomerMutation, DeleteCustomerMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<DeleteCustomerMutation, DeleteCustomerMutationVariables>(DeleteCustomerDocument, options);
+      }
+export type DeleteCustomerMutationHookResult = ReturnType<typeof useDeleteCustomerMutation>;
+export type DeleteCustomerMutationResult = Apollo.MutationResult<DeleteCustomerMutation>;
+export type DeleteCustomerMutationOptions = Apollo.BaseMutationOptions<DeleteCustomerMutation, DeleteCustomerMutationVariables>;
+export const DeleteOrderDocument = gql`
+    mutation DeleteOrder($id: Int!) {
+  deleteOrder(orderId: $id)
+}
+    `;
+export type DeleteOrderMutationFn = Apollo.MutationFunction<DeleteOrderMutation, DeleteOrderMutationVariables>;
+
+/**
+ * __useDeleteOrderMutation__
+ *
+ * To run a mutation, you first call `useDeleteOrderMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteOrderMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteOrderMutation, { data, loading, error }] = useDeleteOrderMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useDeleteOrderMutation(baseOptions?: Apollo.MutationHookOptions<DeleteOrderMutation, DeleteOrderMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<DeleteOrderMutation, DeleteOrderMutationVariables>(DeleteOrderDocument, options);
+      }
+export type DeleteOrderMutationHookResult = ReturnType<typeof useDeleteOrderMutation>;
+export type DeleteOrderMutationResult = Apollo.MutationResult<DeleteOrderMutation>;
+export type DeleteOrderMutationOptions = Apollo.BaseMutationOptions<DeleteOrderMutation, DeleteOrderMutationVariables>;
 export const GetCustomerByIdDocument = gql`
     query GetCustomerById($id: Int!) {
   customers(where: {id: {eq: $id}}) {
