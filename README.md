@@ -137,3 +137,13 @@ query GetOrderById{
 Relations between db tables and GraphQL
 
 http://localhost:5263/graphql-voyager
+
+## Create Database Migrations
+
+```powershell
+dotnet ef migrations add InitialCreate -p backend/Infrastructure -s backend/API -o Migrations
+
+dotnet ef migrations remove -p backend/Infrastructure -s backend/API
+
+dotnet ef database update -s backend/API
+```
