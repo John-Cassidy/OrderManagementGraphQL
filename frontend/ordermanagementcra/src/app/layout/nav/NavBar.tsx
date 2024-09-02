@@ -29,7 +29,7 @@ export default function NavBar() {
             }}
           >
             <Link className='text-link' to='/'>
-              OrderManagement
+              Order Management
             </Link>
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
