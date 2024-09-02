@@ -1,9 +1,14 @@
 import * as yup from 'yup';
 
-import { Container, Grid, Typography } from '@mui/material';
+import { Alert, Container, Grid, Snackbar, Typography } from '@mui/material';
+import {
+  Customer,
+  CustomerModelInput,
+  useAddOrUpdateCustomerMutation,
+} from '../../../graphql/generated/schema';
 import { Form, Formik } from 'formik';
 
-import { Customer } from '../../../graphql/generated/schema';
+import OmLoading from '../../../components/elements/OmLoading';
 import OmSelect from '../../../components/FormsUI/OmSelect';
 import OmSubmitButton from '../../../components/FormsUI/OmSubmitButton';
 import OmTextField from '../../../components/FormsUI/OmTextField';
@@ -44,13 +49,57 @@ export default function CustomerForm({ customer }: Props) {
     country: customer.address?.country || '',
   };
 
-  async function addOrUpdateCustomerDetails(values: any) {
-    console.log(values);
+  const [
+    addOrUpdateCustomer,
+    { loading: addOrUpdateCustomerLoading, error: addOrUpdateCustomerError },
+  ] = useAddOrUpdateCustomerMutation();
+
+  const handleClose = (event: any) => {
+    if (event.reason && event.reason === 'clickaway') {
+      return;
+    }
+
+    setOpen(false);
+  };
+
+  async function addOrUpdateCustomerDetails(values: CustomerModelInput) {
     // Add or update customer details
+
+    const response = await addOrUpdateCustomer({
+      variables: {
+        customer: values,
+      },
+    });
+
+    setOpen(true);
+
+    const customer = response.data?.addOrUpdateCustomer as Customer;
+    if (customer.id) {
+      navigate(`/customers/${customer.id}`);
+    }
+  }
+
+  if (addOrUpdateCustomerLoading) {
+    return <OmLoading />;
+  }
+
+  if (addOrUpdateCustomerError) {
+    return (
+      <Snackbar open={true} autoHideDuration={6000}>
+        <Alert severity='error'>Error retreiving customer data</Alert>
+      </Snackbar>
+    );
   }
 
   return (
     <Container>
+      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity='success' sx={{ width: '100%' }}>
+          {!customer.id
+            ? 'Customer details successfully added'
+            : 'Customer details successfully updated'}
+        </Alert>
+      </Snackbar>
       <div>
         <Formik
           initialValues={INITIAL_FORM_STATE}

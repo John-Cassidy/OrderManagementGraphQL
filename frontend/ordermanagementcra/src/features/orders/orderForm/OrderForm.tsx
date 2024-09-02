@@ -1,11 +1,17 @@
 import * as yup from 'yup';
 
-import { Container, Grid, Typography } from '@mui/material';
+import { Alert, Container, Grid, Snackbar, Typography } from '@mui/material';
 import { Form, Formik } from 'formik';
-import { Order, Status } from '../../../graphql/generated/schema';
+import {
+  Order,
+  OrderModelInput,
+  Status,
+  useAddOrUpdateOrderMutation,
+} from '../../../graphql/generated/schema';
 
 import OmCheckBox from '../../../components/FormsUI/OmCheckBox';
 import OmDatePicker from '../../../components/FormsUI/OmDatePicker';
+import OmLoading from '../../../components/elements/OmLoading';
 import OmSelect from '../../../components/FormsUI/OmSelect';
 import OmSubmitButton from '../../../components/FormsUI/OmSubmitButton';
 import OmTextField from '../../../components/FormsUI/OmTextField';
@@ -44,13 +50,54 @@ export default function OrderForm({ order }: Props) {
     status: order.status ?? Status.Draft,
   };
 
-  async function addOrUpdateOrderDetails(values: any) {
-    console.log(values);
-    // Add or update order details
+  const [
+    addOrUpdateOrder,
+    { loading: addOrUpdateOrderLoading, error: addOrUpdateOrderError },
+  ] = useAddOrUpdateOrderMutation();
+  const handleClose = (event: any) => {
+    if (event.reason && event.reason === 'clickaway') {
+      return;
+    }
+
+    setOpen(false);
+  };
+
+  async function addOrUpdateOrderDetails(values: OrderModelInput) {
+    const response = await addOrUpdateOrder({
+      variables: {
+        order: values,
+      },
+    });
+
+    setOpen(true);
+
+    const order = response.data?.addOrUpdateOrder as Order;
+    if (order.id) {
+      navigate(`/orders/${order.id}`);
+    }
+  }
+
+  if (addOrUpdateOrderLoading) {
+    return <OmLoading />;
+  }
+
+  if (addOrUpdateOrderError) {
+    return (
+      <Snackbar open={true} autoHideDuration={6000}>
+        <Alert severity='error'>Error retreiving order data</Alert>
+      </Snackbar>
+    );
   }
 
   return (
     <Container>
+      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity='success' sx={{ width: '100%' }}>
+          {!order.id
+            ? 'Order details successfully added'
+            : 'Order details successfully updated'}
+        </Alert>
+      </Snackbar>
       <div>
         <Formik
           initialValues={INITIAL_FORM_STATE}
