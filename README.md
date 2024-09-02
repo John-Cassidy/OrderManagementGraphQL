@@ -147,3 +147,10 @@ dotnet ef migrations remove -p backend/Infrastructure -s backend/API
 
 dotnet ef database update -s backend/API
 ```
+
+## Crud Operations
+
+```json
+
+
+```
